@@ -7,14 +7,14 @@ export const registerUser = asyncHandler(async (req, res) => {
   const { email, password, username, fullName } = req.body;
   console.log(email, password);
   if (
-    [email, password, username, fullName].some((feild) => {
-      return feild.trim() === "";
+    [email, password, username, fullName].some((field) => {
+      return field.trim() === "";
     })
   ) {
     throw new ApiError(400, "All feilds are required");
   }
-  const ExistedUser = User.findOne({ $or: [{ username }, { email }] });
-  res.status(200).json({ message: "ok" });
+  const ExistedUser = await User.findOne({ $or: [{ username }, { email }] });
+  // res.status(200).json({ message: "ok" });
   if (ExistedUser) {
     throw new ApiError(400, "user with email and username already exists");
   }
@@ -27,7 +27,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   const avatar = await uploadToCloudinary(avatarlocalPath);
-  const coverImage = await uploadToCloudinary(avatarlocalPath);
+  const coverImage = await uploadToCloudinary(coverImagelocalPath);
 
   if (!avatar) {
     throw new ApiError(400, "avatar is required");

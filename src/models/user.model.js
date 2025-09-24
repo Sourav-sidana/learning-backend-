@@ -16,32 +16,29 @@ email:{type : String,
     lowercase : true,
     trim : true,
 },
-fullname: {
-    username:{
-        type : String,
-        required : true,
-        trim : true,
-        index : true
-    },
-    avtar:{
-        type : String,
-        required : true,
-    },
-    coverImage:{
-        type: String
-    },
-    watchHistory : [{
-        type : Schema.Types.ObjectId,
-        ref: "Video"
-    }],
-    password : {
-        type : String,
-        required: [true ,"password is required"]
-    },
-    refreshToken:{
-        type : String,
+fullName: {
+    type : String,
+    required : true,
+    trim : true
+},
+avatar:{
+    type : String,
+    required : true,
+},
+coverImage:{
+    type: String
+},
+watchHistory : [{
+    type : Schema.Types.ObjectId,
+    ref: "Video"
+}],
+password : {
+    type : String,
+    required: [true ,"password is required"]
+},
+refreshToken:{
+    type : String,
 
-    }
 }
 },{timestamps : true})
 userSchema.pre("save",async function(next){
@@ -66,4 +63,4 @@ userSchema.methods.generateRefreshToken =  function(){
         
      },process.env.ACCESS_TOKEN_SECRET,{expiresIn : process.env.REFRESH_TOKEN_EXPIRY})
  }
-export const User = mongoose.model("Video",userSchema)
+export const User = mongoose.model("User",userSchema)
