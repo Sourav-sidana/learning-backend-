@@ -10,4 +10,5 @@ router.route("/register").post(upload.fields([{name:"avatar",
 }]),registerUser)
 
 
+
 export default router

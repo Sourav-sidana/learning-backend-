@@ -14,13 +14,13 @@ import { v2 as cloudinary } from 'cloudinary';
         { 
             cloud_name: process.env.CLOUD_NAME, 
             api_key: process.env.API_KEY, 
-            api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
+            api_secret: process.env.API_SECRET
         },
     
         
     );
     const uploadToCloudinary = async(localFilePath)=>{
-// console.log("API Key:", process.env.API_KEY); 
+
      try {
         if(!localFilePath)return null
         const uploadResult = await cloudinary.uploader
@@ -33,6 +33,13 @@ import { v2 as cloudinary } from 'cloudinary';
 
      
      console.log(uploadResult.url);
+     fs.unlink(localFilePath,(err)=>{
+        if(err){
+            console.log(err)
+        }else{
+            console.log("file deleted successfully")
+        }
+     })
      return uploadResult;
      } catch (error) {
         console.log(error)
