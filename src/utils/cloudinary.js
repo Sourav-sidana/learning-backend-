@@ -5,8 +5,6 @@ import { v2 as cloudinary } from 'cloudinary';
 
 
     // Configuration
-  
-    
     // Upload an image
   
     cloudinary.config(
